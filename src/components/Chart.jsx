@@ -54,7 +54,8 @@ const Chart = () => {
       });
 
       // Добавляем серию данных
-      const candlestickSeries = chart.current.addCandlestickSeries({
+      const candlestickSeries = chart.current.addSeries({
+        type: 'Candlestick',
         upColor: '#26a69a',
         downColor: '#ef5350',
         borderVisible: false,
@@ -88,7 +89,7 @@ const Chart = () => {
   };
 
   const handleLoadData = () => {
-    if (chart.current) {
+    if (chart.current && chart.current.series().length > 0) {
       const series = chart.current.series()[0];
       loadData(series);
     }
