@@ -8,6 +8,27 @@ const Chart = () => {
   const [interval, setInterval] = useState('1h');
   const [limit, setLimit] = useState(500);
 
+  const loadData = React.useCallback(async (series) => {
+    try {
+      const response = await fetch(
+        `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=${limit}`
+      );
+      const data = await response.json();
+      
+      const formattedData = data.map(item => ({
+        time: item[0] / 1000, // Конвертируем в секунды
+        open: parseFloat(item[1]),
+        high: parseFloat(item[2]),
+        low: parseFloat(item[3]),
+        close: parseFloat(item[4]),
+      }));
+
+      series.setData(formattedData);
+    } catch (error) {
+      console.error('Ошибка загрузки данных:', error);
+    }
+  }, [symbol, interval, limit]);
+
   useEffect(() => {
     if (chartContainerRef.current && !chart.current) {
       chart.current = createChart(chartContainerRef.current, {
@@ -51,28 +72,8 @@ const Chart = () => {
         chart.current = null;
       }
     };
-  }, []);
+  }, [loadData]);
 
-  const loadData = async (series) => {
-    try {
-      const response = await fetch(
-        `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=${limit}`
-      );
-      const data = await response.json();
-      
-      const formattedData = data.map(item => ({
-        time: item[0] / 1000, // Конвертируем в секунды
-        open: parseFloat(item[1]),
-        high: parseFloat(item[2]),
-        low: parseFloat(item[3]),
-        close: parseFloat(item[4]),
-      }));
-
-      series.setData(formattedData);
-    } catch (error) {
-      console.error('Ошибка загрузки данных:', error);
-    }
-  };
 
   const handleSymbolChange = (e) => {
     setSymbol(e.target.value);
