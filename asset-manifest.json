@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ersy-web/static/css/main.4427aa92.css",
+    "main.js": "/ersy-web/static/js/main.a6231ff5.js",
+    "static/js/453.936c73fe.chunk.js": "/ersy-web/static/js/453.936c73fe.chunk.js",
+    "index.html": "/ersy-web/index.html",
+    "main.4427aa92.css.map": "/ersy-web/static/css/main.4427aa92.css.map",
+    "main.a6231ff5.js.map": "/ersy-web/static/js/main.a6231ff5.js.map",
+    "453.936c73fe.chunk.js.map": "/ersy-web/static/js/453.936c73fe.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4427aa92.css",
+    "static/js/main.a6231ff5.js"
+  ]
+}
