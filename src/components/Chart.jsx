@@ -75,7 +75,6 @@ const Chart = () => {
     };
   }, [loadData]);
 
-
   const handleSymbolChange = (e) => {
     setSymbol(e.target.value);
   };
